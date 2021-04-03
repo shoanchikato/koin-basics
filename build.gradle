@@ -1,0 +1,35 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.4.31'
+    id 'application'
+}
+
+repositories {
+    jcenter()
+}
+
+ext {
+    koin_version = '2.2.2'
+}
+
+dependencies {
+    implementation platform('org.jetbrains.kotlin:kotlin-bom')
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+
+    implementation "org.koin:koin-core:$koin_version"
+    testImplementation "org.koin:koin-test:$koin_version"
+    implementation "org.koin:koin-gradle-plugin:$koin_version"
+
+    testImplementation 'org.jetbrains.kotlin:kotlin-test'
+    testImplementation 'org.jetbrains.kotlin:kotlin-test-junit'
+}
+
+compileKotlin {
+    kotlinOptions {
+        // for the 'Used to extend current API with Koin API' warning from koin
+        freeCompilerArgs += '-Xopt-in=org.koin.core.component.KoinApiExtension'
+    }
+}
+
+application {
+    mainClassName = 'com.sample.AppKt'
+}
