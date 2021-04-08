@@ -3,10 +3,22 @@
  */
 package com.sample
 
+import org.koin.test.check.checkModules
 import kotlin.test.Test
 import kotlin.test.assertNotNull
 
 class AppTest {
-    @Test fun testAppHasAGreeting() {
+    /*
+    *
+    * Koin offers a way to test if you Koin modules are good: checkModules - walk through your definition tree
+    * and check if each definition is bound
+    *
+    * Link: https://insert-koin.io/docs/reference/koin-test/testing
+    *
+    * */
+    @Test fun `test koin dependency graph`() {
+        checkModules {
+            modules(moduleOne)
+        }
     }
 }
